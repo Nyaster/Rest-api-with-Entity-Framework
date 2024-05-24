@@ -1,0 +1,6 @@
+@Rest_Api_DBfirst_HostAddress = http://localhost:5061
+
+GET {{Rest_Api_DBfirst_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
