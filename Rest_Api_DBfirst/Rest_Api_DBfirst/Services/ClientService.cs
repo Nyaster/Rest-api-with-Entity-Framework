@@ -1,4 +1,5 @@
-﻿using Rest_Api_DBfirst.Repositories;
+﻿using Rest_Api_DBfirst.Errors;
+using Rest_Api_DBfirst.Repositories;
 
 namespace Rest_Api_DBfirst.Services;
 
@@ -11,8 +12,14 @@ public class ClientService
         _clientRepository = clientRepository;
     }
 
-    public void DeleteClient(int id)
+    public async Task DeleteClient(int id)
     {
-        throw new NotImplementedException();
+        var client = await _clientRepository.GetClient(id);
+        if (client.ClientTrips.Count > 0)
+        {
+            throw new ClientTripsException();
+        }
+
+        await _clientRepository.DeleteClient(client);
     }
 }
